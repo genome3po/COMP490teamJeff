@@ -1,0 +1,140 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>CSUN | Class Search</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- rr for bootstrap -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Top Banner -->
+<div class="jumbotron">
+    <img src="images/cal_state_northridge.jpg">
+</div>
+<!-- Top Banner EOF -->
+
+<!-- Navigation bar -->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="">Class Search</a>
+        </div>
+        
+        <ul class="nav navbar-nav">
+            <li><a href="#">Student Center</a></li>
+            <li><a href="#">Northridge Portal</a></li>
+        </ul>
+    </div>
+</nav>
+<!-- Navigation bar EOF -->
+
+<!-- Main page content -->
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+
+        <!-- Day filter -->
+        <h4><label>Day:</label></h4>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="">
+                    Monday
+            </label>
+        </div>
+
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="">
+                    Tuesday
+            </label>
+        </div>
+
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="">
+                    Wednesday
+            </label>
+        </div>
+
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="">
+                    Thursday
+            </label>
+        </div>
+
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="">
+                    Friday
+            </label>
+        </div>
+
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="">
+                    Saturday
+            </label>
+        </div>
+
+        <br>
+
+        <h4><label>Time:</label></h4>
+
+        <div class="form-group">
+            <label for="startTime">From:</label>
+            <input type="text" class="form-control" id="startTime">
+        </div>
+
+        <div class="form-group">
+            <label for="endTime">To:</label>
+            <input type="text" class="form-control" id="endTime">
+        </div>
+
+        <div class="form-group">
+            <h4><label for="instructor">Instructor:</label></h4>
+            <input type="text" class="form-control" id="instructor">
+        </div>
+
+        <div class="form-group">
+            <h4><label for="department">Department:</label></h4>
+            <input type="text" class="form-control" id="department">
+        </div>
+        
+    </div>
+
+
+
+    
+    <div id="page-content-wrapper">
+        <div class="page-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- content of page -->
+
+                        SAMPLE ALERTS:
+                        
+                        <div class="alert alert-success">
+                            <strong>Success!</strong> Added class successfully.
+                        </div>
+                        
+                        <div class="alert alert-danger">
+                            <strong>Error!</strong> Time confliction for selected class.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Main page EOF-->
+
+</body>
+</html>
