@@ -1,15 +1,20 @@
-var url = 'http://curriculum.ptg.csun.edu/api/courses/comp';
+var url = 'http://curriculum.ptg.csun.edu/api/courses/';
+function makeURL(val) {
+	url = url + val;
+}
+
 $(document).ready(function() {
 
-	// perform a shorthand AJAX call to grab the information
-	$.get(url, function(data) {
+	// perform a shorthand AJAX call to grab the informatiom
 
-		// iterate over the returned courses
-		var courses = data.courses;
-		$(courses).each(function(index, course) {
-
-			// append each course to the content of the element
-			$('#course-results').append('<p>' + course.subject + ' ' + course.catalog_number + '</p>');
+	$('#departmentSubmitButton').click(function() {
+		makeURL($('#formValueId').value);
+		$.get(url, function(data) {
+			var courses = data.courses;
+			$(courses).each(function(index, course) {
+				// append each course to the content of the element
+				$('#course-results').append('<p>' + course.subject + ' ' + course.catalog_number + '</p>');
+			});
 
 		});
 		
