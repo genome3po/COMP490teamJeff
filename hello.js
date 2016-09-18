@@ -17,8 +17,12 @@ $(document).ready(function() {
 
 	// perform a shorthand AJAX call to grab the informatiom
 
+	$(subjects).each(function(index,subject) {
+		$('#subjects').append('<option>' + subject + '</option>');
+	});
+
 	$('#departmentSubmitButton').click(function() {
-		makeURL($('#formValueId').value);
+		makeURL($('#subjects').val);
 		$.get(url, function(data) {
 			var courses = data.courses;
 			$(courses).each(function(index, course) {
