@@ -1,0 +1,1 @@
+for(object ojb : jsonObj) { //do parsing here  put in in a list using   .innerHTML = parsed text}
