@@ -1,4 +1,4 @@
-var url = 'http://curriculum.ptg.csun.edu/api/courses/comp';
+var baseurl = 'http://curriculum.ptg.csun.edu/api/courses/';
 
 var subjects = ["A/R","AAS","ACCT","AE","afrs","AIS","AM","ANTH","ARAB","ARMN","ART",
 "ASTR","ATHL","ATHS","BIOL","BLAW","BUS","CADV","CAS","CD","CE","CECS","CHEM","CHIN",
@@ -9,33 +9,26 @@ var subjects = ["A/R","AAS","ACCT","AE","afrs","AIS","AM","ANTH","ARAB","ARMN","
 "NURS","PERS","PHIL","PHSC","PHYS","POLS","PSY","PT","QS","RS","RTM","RUSS","SBS","SCI",
 "SCM","SED","SOC","SOM","SPAN","SPED","SUST","SWRK","TH","UDFC","UNIV","URBS","URBSFal"];
 
-function makeURL(val) {
-	url = url + val;
-}
-
 $(document).ready(function() {
 
 	// perform a shorthand AJAX call to grab the informatiom
-
 	$(subjects).each(function(index,subject) {
 		$('#subjects').append('<option>' + subject + '</option>');
 	});
-
-	$('#departmentSubmitButton').click(function() {
+	var courses;
+	$('#department-submit-button').click(function() {
 		var selected = $('#subjects').val();
-	});
+		url = baseurl + selected;
+		$.get(url, function(data) {
 
-	$.get(url, function(data) {
+			// iterate over the returned courses
+			courses = data.courses;
+			$('#course-results').empty();
+			$(courses).each(function(index, course) {
 
-		// iterate over the returned courses
-		var courses = data.courses;
-		$(courses).each(function(index, course) {
-
-			// append each course to the content of the element
-			$('#course-results').append('<p>' + course.subject + ' ' + course.catalog_number + '</p>');
-
+				// append each course to the content of the element
+				$('#course-results').append('<p>' + course.subject + ' ' + course.catalog_number + '</p>');
+			});
 		});
-		
 	});
-
 });
