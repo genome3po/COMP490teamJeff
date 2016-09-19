@@ -1,0 +1,10 @@
+lodash
+$.ajax({
+  url: "test.html", <----------- u type your request url
+  context: document.body
+}).done(function() {
+  $( this ).addClass( "done" );
+});
+var jsonreturn =  w/e u get from request
+and return jsonreturn;
+.first(3)
