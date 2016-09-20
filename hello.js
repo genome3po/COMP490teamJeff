@@ -9,6 +9,10 @@ var subjects = ["A/R","AAS","ACCT","AE","AFRS","AIS","AM","ANTH","ARAB","ARMN","
 "NURS","PERS","PHIL","PHSC","PHYS","POLS","PSY","PT","QS","RS","RTM","RUSS","SBS","SCI",
 "SCM","SED","SOC","SOM","SPAN","SPED","SUST","SWRK","TH","UDFC","UNIV","URBS","URBSFal"];
 
+function courseClick() {
+    document.getElementByName("p").innerHTML = "YOU CLICKED ME!";
+}
+
 $(document).ready(function() {
 
 	// perform a shorthand AJAX call to grab the informatiom
@@ -27,7 +31,7 @@ $(document).ready(function() {
 			$(courses).each(function(index, course) {
 
 				// append each course to the content of the element
-				$('#course-results').append('<p>' + course.subject + ' ' + course.catalog_number + '</p>');
+				$('#course-results').append('<p onclick="courseClick()">' + course.subject + ' ' + course.catalog_number + '</p>');
 			});
 		});
 	});
