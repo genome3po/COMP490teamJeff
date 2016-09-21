@@ -9,10 +9,6 @@ var subjects = ["A/R","AAS","ACCT","AE","AFRS","AIS","AM","ANTH","ARAB","ARMN","
 "NURS","PERS","PHIL","PHSC","PHYS","POLS","PSY","PT","QS","RS","RTM","RUSS","SBS","SCI",
 "SCM","SED","SOC","SOM","SPAN","SPED","SUST","SWRK","TH","UDFC","UNIV","URBS","URBSFal"];
 
-function courseClick() {
-    document.getElementByName("p").innerHTML = "YOU CLICKED ME!";
-}
-
 $(document).ready(function() {
 
 	// perform a shorthand AJAX call to grab the informatiom
@@ -22,19 +18,25 @@ $(document).ready(function() {
 	var courses;
 	$('#department-submit-button').click(function() {
 		var selected = $('#subjects').val();
-		url = baseurl + 'courses/' + selected;
+		url = baseurl + 'classes/' + selected;
 		$.get(url, function(data) {
 
 			// iterate over the returned courses
-			courses = data.courses;
+			courses = data.classes;
 			$('#course-results').empty();
 			$(courses).each(function(index, course) {
 
 				// append each course to the content of the element
-				$('#course-results').append('<p onclick="courseClick()">' + course.subject + ' ' + course.catalog_number + '</p>');
+				$('#course-results').append('<p>' + course.subject + ' ' + course.catalog_number + course.days + '</p>');
 			});
 		});
 	});
+
+	function dayFilter(courseList, filter) {
+		if(courseList != null) {
+
+		}
+	}
 
 	$('#instructor-submit-button').click(function() {
 		var firstName = $('#firstName').val();
