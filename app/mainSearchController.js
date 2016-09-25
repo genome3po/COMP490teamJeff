@@ -1,14 +1,3 @@
-var baseurl = 'http://curriculum.ptg.csun.edu/api/';
-
-var subjects = ["A/R","AAS","ACCT","AE","AFRS","AIS","AM","ANTH","ARAB","ARMN","ART",
-"ASTR","ATHL","ATHS","BIOL","BLAW","BUS","CADV","CAS","CD","CE","CECS","CHEM","CHIN",
-"CHS","CIT","CLAS","CM","CMT","COMP","COMS","CTVA","DEAF","ECE","ECON","EDUC","EED",
-"ELPS","ENGL","EOH","EPC","FCCA","FCFC","FCHC","FCS","FCSB","FCUD","FIN","FLIT","FREN",
-"GBUS","GEOG","GEOL","GWS","HEBR","HHD","HIST","HSCI","HUM","HUMA","IS","ITAL","JAPN",
-"JOUR","JS","KIN","KOR","LING","LRS","MATH","MCOM","ME","MGT","MKT","MPA","MSE","MUS",
-"NURS","PERS","PHIL","PHSC","PHYS","POLS","PSY","PT","QS","RS","RTM","RUSS","SBS","SCI",
-"SCM","SED","SOC","SOM","SPAN","SPED","SUST","SWRK","TH","UDFC","UNIV","URBS","URBSFal"];
-
 $(document).ready(function() {
 
 	// perform a shorthand AJAX call to grab the informatiom
@@ -21,16 +10,41 @@ $(document).ready(function() {
 		url = baseurl + 'classes/' + selected;
 		$.get(url, function(data) {
 
+			var courseMap = Object();
+
 			// iterate over the returned courses
 			courses = data.classes;
 			$('#course-results').empty();
 			$(courses).each(function(index, course) {
+				var courseInfo;
+				if(courseMap[course.catalog_number] === undefined) {
+					courseInfo = Object();
+					courseInfo.subject = course.subject;
+					courseInfo.title = course.title;
+					courseInfo.catalog_number = course.catalog_number;
+					courseInfo.description = course.description;
+					//concatInstructors(course.instructors, courseInfo.);
+					courseMap[course.catalog_number] = courseInfo;
+				} else {
+					courseInfo = courseMap[course.catalog_number];
+					//concatInstructors(course.instructors, courseInfo.);
+				}
 
-				// append each course to the content of the element
-				$('#course-results').append('<p>' + course.subject + ' ' + course.catalog_number + course.days + '</p>');
 			});
+
+			displayClasses(courseMap);
 		});
 	});
+
+	function displayClasses(courseMap) {
+		$.map(courseMap, function(value, index) {
+			console.log(value.title + " " + index);
+
+			// append each course to the content of the element
+			$('#course-results').append('<p>' + value.subject + ' ' + value.catalog_number + ' ' + value.title +
+				'<br>' + value.description + '</p>');
+		});
+	}
 
 	function dayFilter(courseList, filter) {
 		if(courseList != null) {
