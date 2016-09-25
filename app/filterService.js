@@ -1,18 +1,21 @@
 function filterHandler(courseList, filterMap) {
+    var returnCourseList = [];
+    $.extend( true, returnCourseList, courseList);
+
     $.map(filterMap, function(val, i) {
         switch(i) {
             case "day":
-                courseList = filterDay(courseList, val);
+                returnCourseList = filterDay(returnCourseList, val);
                 break;
             case "time":
-                // courseList = filterTime(courseList, val);
+                // returnCourseList = filterTime(courseList, val);
                 break;
             default:
                 break;
         }
     });
 
-    return courseList;
+    return returnCourseList;
 }
 
 /**

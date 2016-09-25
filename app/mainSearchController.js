@@ -1,3 +1,5 @@
+var COURSE_CALL;
+
 $(document).ready(function() {
 
 	// perform a shorthand AJAX call to grab the informatiom
@@ -14,7 +16,6 @@ $(document).ready(function() {
 
 			// iterate over the returned courses
 			courses = data.classes;
-			$('#course-results').empty();
 			$(courses).each(function(index, course) {
 				var courseInfo;
 				if(courseMap[course.catalog_number] === undefined) {
@@ -36,7 +37,8 @@ $(document).ready(function() {
 				}
 
 			});
-			
+
+			COURSE_CALL = courseMap;
 			displayClasses(courseMap);
 		});
 	});
@@ -44,21 +46,6 @@ $(document).ready(function() {
 	function appendMeetingTime(course, courseInfo) {
 		$.each(course.meetings, function(index, meeting) {
 			courseInfo.meetings.push(meeting);
-		});
-	}
-
-	function displayClasses(courseMap) {
-		$.map(courseMap, function(value, index) {
-			
-			console.log(value.title + " " + index);
-
-			// append each course to the content of the element
-			$('#course-results').append('<p>' + value.subject + ' ' + value.catalog_number + ' ' + value.title +
-				'<br>' + value.description);
-			$.each(value.meetings, function(index, meetings) {
-				$('#course-results').append('<br>' + meetings.days);
-			});
-			$('#course-results').append('</p>');
 		});
 	}
 
