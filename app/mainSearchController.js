@@ -23,33 +23,43 @@ $(document).ready(function() {
 					courseInfo.title = course.title;
 					courseInfo.catalog_number = course.catalog_number;
 					courseInfo.description = course.description;
+					courseInfo.meetings = [];
+					appendMeetingTime(course, courseInfo);
 					//concatInstructors(course.instructors, courseInfo.);
+
 					courseMap[course.catalog_number] = courseInfo;
+
 				} else {
 					courseInfo = courseMap[course.catalog_number];
 					//concatInstructors(course.instructors, courseInfo.);
+					appendMeetingTime(course, courseInfo);
 				}
 
 			});
-
+			
 			displayClasses(courseMap);
 		});
 	});
 
+	function appendMeetingTime(course, courseInfo) {
+		$.each(course.meetings, function(index, meeting) {
+			courseInfo.meetings.push(meeting);
+		});
+	}
+
 	function displayClasses(courseMap) {
 		$.map(courseMap, function(value, index) {
+			
 			console.log(value.title + " " + index);
 
 			// append each course to the content of the element
 			$('#course-results').append('<p>' + value.subject + ' ' + value.catalog_number + ' ' + value.title +
-				'<br>' + value.description + '</p>');
+				'<br>' + value.description);
+			$.each(value.meetings, function(index, meetings) {
+				$('#course-results').append('<br>' + meetings.days);
+			});
+			$('#course-results').append('</p>');
 		});
-	}
-
-	function dayFilter(courseList, filter) {
-		if(courseList != null) {
-
-		}
 	}
 
 	$('#instructor-submit-button').click(function() {
