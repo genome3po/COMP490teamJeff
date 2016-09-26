@@ -28,6 +28,7 @@ $(document).ready(function() {
 					appendMeetingTime(course, courseInfo);
 					//concatInstructors(course.instructors, courseInfo.);
 
+					courseInfo.show = true;
 					courseMap[course.catalog_number] = courseInfo;
 
 				} else {
@@ -39,6 +40,7 @@ $(document).ready(function() {
 			});
 
 			COURSE_CALL = courseMap;
+			setupFiltering();
 			displayClasses(courseMap);
 		});
 	});
@@ -49,6 +51,7 @@ $(document).ready(function() {
 			meeting.days = value.days;
 			meeting.start_time = convertTime(value.start_time);
 			meeting.end_time = convertTime(value.end_time);
+			meeting.show = true;
 			courseInfo.meetings.push(meeting);
 		});
 	}

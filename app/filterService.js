@@ -1,21 +1,87 @@
-function filterHandler(courseList, filterMap) {
-    var returnCourseList = courseList;
+/**
+ * filterMap layers:
+ * day             (regular expression)
+ * time
+ *      start_time (HH:MM 24h)
+ *      end_time   (HH:MM 24h)
+ */
 
+function setupFiltering() {
+    var filterMap = new Object();
+
+    checkDayInput(filterMap);
+    checkTimeInput(filterMap);
+
+    filterHandler(COURSE_CALL, filterMap);
+}
+
+
+/**
+ * Checks which day checkboxes are selected and creates a regular expression
+ * with their values.
+ * @param filterMap
+ */
+function checkDayInput(filterMap) {
+    var selectedDay = [];
+    $('#dayCheckboxes input:checked').each(function() {
+        selectedDay.push($(this).val());
+    });
+
+    var dayRegex = "^(";
+    $.each(selectedDay, function(index, value) {
+        dayRegex += value;
+        dayRegex += (index < selectedDay.length-1 ? "|" : "");
+    });
+    dayRegex += ")$";
+
+    filterMap.day = dayRegex;
+}
+
+
+/**
+ * Checks if time is input for filtering and add their values to
+ * the filterMap if they are present.
+ * @param filterMap
+ */
+function checkTimeInput(filterMap) {
+
+    var start_time = $("#start_time").val();
+    var end_time = $("#end_time").val();
+
+    start_time = (start_time === "" ? undefined : start_time);
+    end_time = (end_time === "" ? undefined : end_time);
+
+    if(start_time != undefined && end_time != undefined) {
+        if(start_time > end_time) {
+            alert("Start time must be before end time.");
+            return;
+        }
+    }
+
+    if(start_time != undefined || end_time != undefined) {
+        filterMap.time = new Object();
+        filterMap.time.start_time = (start_time != undefined ? start_time : null );
+        filterMap.time.end_time = (end_time != undefined ? end_time : null );
+    } else {
+        return;
+    }
+}
+
+function filterHandler(courseList, filterMap) {
     $.map(filterMap, function(val, i) {
         switch(i) {
             case "day":
-                returnCourseList = filterDay(returnCourseList, val);
+                filterDay(courseList, val);
                 break;
             case "time":
-                returnCourseList = filterTime(returnCourseList, val);
+                filterTime(courseList, val);
                 break;
             default:
                 break;
         }
     });
-
-    return returnCourseList;
 }
+
 
 /**
  * Receives a list of courses and returns only the courses that adhere to
@@ -28,7 +94,6 @@ function filterHandler(courseList, filterMap) {
  * @returns {Array}
  */
 function filterDay(courseList, dayFilter) {
-    var courseListReturn = [];
 
     // Iterate through each course
     $.each(courseList, function(index, course) {
@@ -38,53 +103,64 @@ function filterDay(courseList, dayFilter) {
         // If the meeting day is in the filter then push the
         // course onto the list and create a new meeting array for it
         // with the matching meeting day
-        var returnCourse = course;
-        var inFilter = false;
-        returnCourse.meetings = [];
+        var validMeeting = false;
         $.each(meetings, function(index, meeting) {
             if(meeting.days.match(dayFilter)) {
-                returnCourse.meetings.push(meeting);
-                inFilter = true;
+                meeting.show = true;
+                validMeeting = true;
+            } else {
+                meeting.show = false;
             }
-        });
-        if(inFilter) {
-            courseListReturn.push(returnCourse);
-        }
-    });
-    return courseListReturn;
+        }); // end meeting iteration
+        course.show = validMeeting;
+
+    }); // end course iteration
 }
 
+
+/**
+ * Receives a list of courses and returns only the courses that adhere to
+ * the specified time filter. Courses are hidden if they do not start after
+ * the specified start time or end before the specified end time.
+ * @param courseList
+ * @param timeFilter
+ *              Time filter is structured as start_time and end_time
+ */
 function filterTime(courseList, timeFilter) {
-    var courseListReturn = courseList;
 
     $.each(courseList, function(index, course) {
         var meetings = course.meetings;
 
-        var returnCourse = course;
-        var inFilter = false;
-        returnCourse.meetings = [];
-        $.each(meetings, function(index, meeting) {
-            if( (timeFilter.start_time != undefined) && (timeFilter.end_time != undefined) ) {
-                if (meeting.start_time >= timeFilter.start_time && meeting.end_time <= timeFilter.end_time) {
-                    returnCourse.meetings.push(meeting);
-                    inFilter = true;
-                }
-            } else if ( timeFilter.start_time != undefined ) {
-                if (meeting.start_time >= timeFilter.start_time) {
-                    returnCourse.meetings.push(meeting);
-                    inFilter = true;
-                }
-            } else if ( timeFilter.end_time != undefined ) {
-                if (meeting.end_time <= timeFilter.end_time) {
-                    returnCourse.meetings.push(meeting);
-                    inFilter = true;
-                }
-            }
-        });
+        var validMeeting = false;
+        $.each(meetings, function (index, meeting) {
 
-        if(inFilter) {
-            courseListReturn.push(returnCourse);
-        }
-    });
-    return courseListReturn;
+            $.map(timeFilter, function(val, i) {
+                switch(i) {
+                    case "start_time":
+                        if(meeting.start_time < val) {
+                            meeting.show = false;
+                            validMeeting = false;
+                        } else {
+                            meeting.show = true;
+                            validMeeting = true;
+                        }
+                        break;
+                    case "end_time":
+                        if(meeting.end_time > val) {
+                            meeting.show = false;
+                            validMeeting = false;
+                        } else {
+                            meeting.show = true;
+                            validMeeting = true;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            });
+
+        }); // end meeting iteration
+        course.show = validMeeting;
+
+    }); // end course iteration
 }
