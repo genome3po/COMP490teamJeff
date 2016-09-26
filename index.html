@@ -1,8 +1,11 @@
 <html>
 	<head>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-		<script src="C:\Users\Asad\Documents\team-jeff\COMP490teamJeff\hello.js"></script>
-		<!-- <script src="E:\Users\Asad\Documents\CSUN\COMP 490\ClassSearch\COMP490teamJeff\hello.js"></script> -->
+		<script src="app/mainSearchController.js"></script>
+		<script src="app/mainSearchService.js"></script>
+		<script src="app/constants.js"></script>
+		<script src="app/filterService.js"></script>
+		<script src="app/filterController.js"></script>
 	</head>
 	<body>
 		<h1>Hello World</h1>
@@ -10,10 +13,23 @@
 		</select>
  		<button id="department-submit-button">Filter By Department</button>
  		<form>
- 			First Name: <input type="text" name="Firstname" id="firstName"></input>
- 			Last Name: <input type="text" name="Lastname" id="lastName"></input>
+ 			First Name: <input type="text" name="Firstname" id="firstName">
+ 			Last Name: <input type="text" name="Lastname" id="lastName">
  		</form>
- 		<button id="instructor-submit-button">Filter By Instructor</button>
+ 		<button id="instructor-submit-button">Search By Instructor</button>
+		<div id="dayCheckboxes">
+			<input class="dayCheckbox" type="checkbox" value="M.*" checked="checked" />Monday
+			<input class="dayCheckbox" type="checkbox" value=".*T.*" checked="checked" />Tuesday
+			<input class="dayCheckbox" type="checkbox" value=".*W.*" checked="checked" />Wednesday
+			<input class="dayCheckbox" type="checkbox" value=".*R.*" checked="checked" />Thursday
+			<input class="dayCheckbox" type="checkbox" value=".*F.*" checked="checked" />Friday
+			<input class="dayCheckbox" type="checkbox" value=".*S" checked="checked" />Saturday
+			<input class="dayCheckbox" type="checkbox" value="A" checked="checked" />Online
+		</div>
+		<input id="start_time" type="text" placeholder="08:00" >Start Time
+		<input id="end_time" type="text" placeholder="15:00" >End Time
+		<button id="filter-submit-button">Filter</button>
+
 		<div id="course-results">
 		</div>
 	</body>
