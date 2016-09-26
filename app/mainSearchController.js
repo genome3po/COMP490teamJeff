@@ -2,7 +2,7 @@ var COURSE_CALL;
 
 $(document).ready(function() {
 
-	// perform a shorthand AJAX call to grab the informatiom
+	// perform a shorthand AJAX call to grab the information
 	$(subjects).each(function(index,subject) {
 		$('#subjects').append('<option>' + subject + '</option>');
 	});

@@ -1,5 +1,5 @@
 function filterHandler(courseList, filterMap) {
-    var returnCourseList = [];
+    var returnCourseList = courseList;
 
     $.map(filterMap, function(val, i) {
         switch(i) {
@@ -7,7 +7,7 @@ function filterHandler(courseList, filterMap) {
                 returnCourseList = filterDay(returnCourseList, val);
                 break;
             case "time":
-                returnCourseList = filterTime(courseList, val);
+                returnCourseList = filterTime(returnCourseList, val);
                 break;
             default:
                 break;
@@ -23,7 +23,7 @@ function filterHandler(courseList, filterMap) {
  * @param courseList
  * @param dayFilter
  *              A regular expression for the days to include
- *              i.e. ^(M|W|MW)$ will return all courses that
+ *              i.e. ^(M.*|.*W.*)$ will return all courses that
  *              are on Monday, Wednesday, or Monday and Wednesday
  * @returns {Array}
  */
@@ -55,7 +55,7 @@ function filterDay(courseList, dayFilter) {
 }
 
 function filterTime(courseList, timeFilter) {
-    var courseListReturn = [];
+    var courseListReturn = courseList;
 
     $.each(courseList, function(index, course) {
         var meetings = course.meetings;
@@ -64,23 +64,24 @@ function filterTime(courseList, timeFilter) {
         var inFilter = false;
         returnCourse.meetings = [];
         $.each(meetings, function(index, meeting) {
-            if( (timeFilter.start_time != "") && (timeFilter.end_time != "") ) {
+            if( (timeFilter.start_time != undefined) && (timeFilter.end_time != undefined) ) {
                 if (meeting.start_time >= timeFilter.start_time && meeting.end_time <= timeFilter.end_time) {
                     returnCourse.meetings.push(meeting);
                     inFilter = true;
                 }
-            } else if ( timeFilter.start_time != "" ) {
+            } else if ( timeFilter.start_time != undefined ) {
                 if (meeting.start_time >= timeFilter.start_time) {
                     returnCourse.meetings.push(meeting);
                     inFilter = true;
                 }
-            } else if ( timeFilter.end_time != "" ) {
+            } else if ( timeFilter.end_time != undefined ) {
                 if (meeting.end_time <= timeFilter.end_time) {
                     returnCourse.meetings.push(meeting);
                     inFilter = true;
                 }
             }
         });
+
         if(inFilter) {
             courseListReturn.push(returnCourse);
         }
