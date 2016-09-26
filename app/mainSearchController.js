@@ -44,9 +44,22 @@ $(document).ready(function() {
 	});
 
 	function appendMeetingTime(course, courseInfo) {
-		$.each(course.meetings, function(index, meeting) {
+		$.each(course.meetings, function(index, value) {
+			var meeting = [];
+			meeting.days = value.days;
+			meeting.start_time = convertTime(value.start_time);
+			meeting.end_time = convertTime(value.end_time);
 			courseInfo.meetings.push(meeting);
 		});
+	}
+
+	function convertTime(time) {
+		var convertedTime = "";
+
+		convertedTime += time[0] + time[1] + ":" +
+				time[2] + time[3];
+
+		return convertedTime;
 	}
 
 	$('#instructor-submit-button').click(function() {

@@ -1,6 +1,5 @@
 function filterHandler(courseList, filterMap) {
     var returnCourseList = [];
-    $.extend( true, returnCourseList, courseList);
 
     $.map(filterMap, function(val, i) {
         switch(i) {
@@ -8,7 +7,7 @@ function filterHandler(courseList, filterMap) {
                 returnCourseList = filterDay(returnCourseList, val);
                 break;
             case "time":
-                // returnCourseList = filterTime(courseList, val);
+                returnCourseList = filterTime(courseList, val);
                 break;
             default:
                 break;
@@ -46,6 +45,40 @@ function filterDay(courseList, dayFilter) {
             if(meeting.days.match(dayFilter)) {
                 returnCourse.meetings.push(meeting);
                 inFilter = true;
+            }
+        });
+        if(inFilter) {
+            courseListReturn.push(returnCourse);
+        }
+    });
+    return courseListReturn;
+}
+
+function filterTime(courseList, timeFilter) {
+    var courseListReturn = [];
+
+    $.each(courseList, function(index, course) {
+        var meetings = course.meetings;
+
+        var returnCourse = course;
+        var inFilter = false;
+        returnCourse.meetings = [];
+        $.each(meetings, function(index, meeting) {
+            if( (timeFilter.start_time != "") && (timeFilter.end_time != "") ) {
+                if (meeting.start_time >= timeFilter.start_time && meeting.end_time <= timeFilter.end_time) {
+                    returnCourse.meetings.push(meeting);
+                    inFilter = true;
+                }
+            } else if ( timeFilter.start_time != "" ) {
+                if (meeting.start_time >= timeFilter.start_time) {
+                    returnCourse.meetings.push(meeting);
+                    inFilter = true;
+                }
+            } else if ( timeFilter.end_time != "" ) {
+                if (meeting.end_time <= timeFilter.end_time) {
+                    returnCourse.meetings.push(meeting);
+                    inFilter = true;
+                }
             }
         });
         if(inFilter) {
