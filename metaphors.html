@@ -1,0 +1,217 @@
+﻿<!DOCTYPE HTML>
+<html class="no-js" lang="en">
+<head>
+<style>  
+   
+ul.tab {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #D00D2D;
+}
+
+/* Float the list items side by side */
+ul.tab li {float: left;}
+
+/* Style the links inside the list items */
+ul.tab li a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Change background color of links on hover */
+ul.tab li a:hover {
+    background-color: #E74A37;
+}
+
+/* Create an active/current tablink class */
+ul.tab li a:focus, .active {
+    background-color: #E74A37;
+}
+
+/* Style the tab content */
+.tabcontent {
+    margin: 5px;
+    display: none;
+}
+
+#border  {
+        padding:0px;
+	border: 2px solid #D00D2D;
+        margin:15px;
+}
+
+table {
+    width:100%;
+    margin-top:5px;
+    margin-bottom:5px;
+}
+
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+
+
+table#t01 tr:nth-child(even) {
+    background-color: powderblue;
+}
+table#t01 tr:nth-child(odd) {
+   background-color:#2C8EF2;
+}
+
+}
+</style>
+ 
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metaphor by META+LAB</title>
+  <meta name="description" content="">
+
+  <script src="//use.typekit.net/gfb2mjm.js"></script>
+  <script>try{Typekit.load();}catch(e){}</script>
+
+  <link rel="stylesheet" href="../comp490teamjeff/bower_components/metaphor/dist/css/metaphor.css">
+</head>
+<body>
+  <!-- Add Code & Start Building :D -->
+
+<nav class="primary-nav" style="margin-top:5px;">
+<div class="container">
+  <div class="primary-nav__mobile">
+    <div class="primary-nav__btn">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+    <div class="primary-nav__brand"><span class="sr-only">California State University, Northridge (CSUN)</span></div>
+  </div>
+  <ul class="primary-nav__links">
+    <li><a class="primary-nav__link active" href="#">Class Search</a></li>
+    <li><a class="primary-nav__link" href="#">Mock Schedule</a></li>
+    <li><a class="primary-nav__link" href="#">Student Center</a></li>
+  </ul>
+</div>
+</nav>
+
+
+<div class="row" style="padding-left:10px;">
+<div class="col-md-3" id="border">
+<aside>  
+<ul class="tab">
+  <li><a href="#" class="tablinks" onclick="openCity(event, 'London')">Filters</a></li>
+  <li><a href="#" class="tablinks" onclick="openCity(event, 'Paris')">Mock Schedule</a></li>
+</ul>
+
+<div id="London" class="tabcontent">
+<form action="">
+<h4>Deparment</h4>
+<select name="Department">
+    <option value="Math">Math</option>
+    <option value="Science">Science</option>
+    <option value="English">English</option>
+    <option value="History">History</option>
+  </select>
+  <br>
+<h4>Instructor</h4>
+  <input type="text" name="name" value="">
+  <br>
+<h4>Days</h4>
+<input type="checkbox" name="day" value="M">Monday<br>
+<input type="checkbox" name="day" value="T">Tuesday<br>
+<input type="checkbox" name="day" value="W">Wednesday<br>
+<input type="checkbox" name="day" value="R">Thursday<br>
+<input type="checkbox" name="day" value="F">Friday<br>
+<input type="checkbox" name="day" value="S">Saturday<br>
+<br>
+<h4>Times</h4>
+<select name="StartTime">
+    <option value="8">8:00am</option>
+    <option value="9">9:00am</option>
+    <option value="10">10:00am</option>
+    <option value="11">11:00am</option>
+  </select>
+  <br>
+<select name="EndTime">
+    <option value="14">2:00pm</option>
+    <option value="15">3:00pm</option>
+    <option value="16">4:00pm</option>
+    <option value="17">5:00pm</option>
+  </select>
+  <br>
+  <input type="submit">
+</form>
+</div>
+
+<div id="Paris" class="tabcontent">
+  <h3>Paris</h3>
+  <p>Paris is the capital of France.</p> 
+</div>
+
+</aside>
+</div>
+
+<div class="col-md-8" style="background-color:#cccccc; margin-top:15px;">
+
+<section style="margin-top:10px;">
+Select A Course and Choose and Option
+<a style="margin:5px;" class="btn btn-primary">Add to Mock Schedule</a>
+<a style="margin:5px;" class="btn btn-primary">Register</a>
+<table id="t01">
+  <tr>
+    <th rowspan="3" style="width:5%;">
+    <form action="" style="text-align:center;">
+    <input type="checkbox" name="vehicle" value="Bike">
+    </form>
+    </th>
+    <th style="width:15%">Instructor:</th>
+    <td>Insert</td>
+    <th style="width15%">Class Room:</th>
+    <td>Insert</td>
+  </tr>
+  <tr>
+    <th style="width:10%">Time:</td>
+    <td>Insert</td>
+    <th style="width:10%">Availability:</td>
+    <td>Insert</td>
+  </tr>
+  <tr>
+    <th style="width:10%">Days:</td>
+    <td>Insert</td>
+    <th style="width:25%">Rate My Professor:</td>
+    <td>Insert</td>
+  </tr>
+</table>
+</section>
+</div> 
+
+</div>
+
+
+  <script>
+function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+</script>
+
+  <script src="../comp490teamjeff/bower_components/metaphor/dist/js/metaphor.js"></script>
+</body>
+</html>
