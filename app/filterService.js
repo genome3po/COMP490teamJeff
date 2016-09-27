@@ -68,18 +68,21 @@ function checkTimeInput(filterMap) {
 }
 
 function filterHandler(courseList, filterMap) {
-    $.map(filterMap, function(val, i) {
-        switch(i) {
-            case "day":
-                filterDay(courseList, val);
-                break;
-            case "time":
-                filterTime(courseList, val);
-                break;
-            default:
-                break;
-        }
-    });
+
+    $.each(courseList, function(index, course) {
+        $.map(filterMap, function (val, i) {
+            switch (i) {
+                case "day":
+                    filterDay(course, val);
+                    break;
+                case "time":
+                    filterTime(course, val);
+                    break;
+                default:
+                    break;
+            }
+        });
+    }); // end course iteration
 }
 
 
@@ -93,28 +96,26 @@ function filterHandler(courseList, filterMap) {
  *              are on Monday, Wednesday, or Monday and Wednesday
  * @returns {Array}
  */
-function filterDay(courseList, dayFilter) {
+function filterDay(course, dayFilter) {
 
     // Iterate through each course
-    $.each(courseList, function(index, course) {
-        var meetings = course.meetings;
+    var meetings = course.meetings;
 
-        // Iterate through each meeting day for a course
-        // If the meeting day is in the filter then push the
-        // course onto the list and create a new meeting array for it
-        // with the matching meeting day
-        var validMeeting = false;
-        $.each(meetings, function(index, meeting) {
-            if(meeting.days.match(dayFilter)) {
-                meeting.show = true;
-                validMeeting = true;
-            } else {
-                meeting.show = false;
-            }
-        }); // end meeting iteration
-        course.show = validMeeting;
+    // Iterate through each meeting day for a course
+    // If the meeting day is in the filter then push the
+    // course onto the list and create a new meeting array for it
+    // with the matching meeting day
+    var validMeeting = false;
+    $.each(meetings, function(index, meeting) {
+        if(meeting.days.match(dayFilter)) {
+            meeting.show = true;
+            validMeeting = true;
+        } else {
+            meeting.show = false;
+        }
+    }); // end meeting iteration
+    course.show = validMeeting;
 
-    }); // end course iteration
 }
 
 
@@ -126,29 +127,38 @@ function filterDay(courseList, dayFilter) {
  * @param timeFilter
  *              Time filter is structured as start_time and end_time
  */
-function filterTime(courseList, timeFilter) {
+function filterTime(course, timeFilter) {
+    // Check if the course was hidden in the day filterer
+    if(course.show === false)
+        return;
 
-    $.each(courseList, function(index, course) {
-        var meetings = course.meetings;
+    var meetings = course.meetings;
 
-        var validMeeting = false;
-        $.each(meetings, function (index, meeting) {
+    var validMeeting = false;
+    $.each(meetings, function (index, meeting) {
 
-            $.map(timeFilter, function(val, i) {
-                switch(i) {
+        // Check if the meeting was hidden in the day filterer
+        if(meeting.show !== false) {
+
+            $.map(timeFilter, function (val, i) {
+                switch (i) {
                     case "start_time":
-                        if(meeting.start_time < val) {
+                        if (meeting.start_time < val) {
                             meeting.show = false;
                             validMeeting = false;
+                        } else if (val === null) {
+                            meeting.show = meeting.show;
                         } else {
                             meeting.show = true;
                             validMeeting = true;
                         }
                         break;
                     case "end_time":
-                        if(meeting.end_time > val) {
+                        if (meeting.end_time > val) {
                             meeting.show = false;
                             validMeeting = false;
+                        } else if (val === null) {
+                            meeting.show = meeting.show;
                         } else {
                             meeting.show = true;
                             validMeeting = true;
@@ -158,9 +168,9 @@ function filterTime(courseList, timeFilter) {
                         break;
                 }
             });
+        }
 
-        }); // end meeting iteration
-        course.show = validMeeting;
+    }); // end meeting iteration
+    course.show = validMeeting;
 
-    }); // end course iteration
 }
