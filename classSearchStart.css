@@ -28,3 +28,11 @@
 .label--required {
 	font-size: 1.5em;
 }
+
+.form__group {
+	text-indent: 20px;
+}
+
+.label {
+	font-size: 1.5em;
+}
