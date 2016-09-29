@@ -3,10 +3,17 @@
 	border-right-style: solid;
 	border-color: red;
 	height: 600px;
+	
+	
+	padding-top: 5%;
+	padding-left: 10%;
+	padding-right: 10%;
 }
 
-#search-right {
-	padding: 50px;
+#search-right {	
+	padding-top: 10%;
+	padding-left: 10%;
+	padding-right: 10%;
 }
 
 #search-wrapper {
@@ -14,5 +21,10 @@
 }
 
 #search-button {
+	padding-top: 25px;
 	text-align: center;
+}
+
+.label--required {
+	font-size: 1.5em;
 }

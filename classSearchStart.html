@@ -5,7 +5,14 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>CSUN | Class Search</title>
-	<meta name="description" content="">
+	<meta name="description" content="">	
+	
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		<script src="app/mainSearchController.js"></script>
+		<script src="app/mainSearchService.js"></script>
+		<script src="app/constants.js"></script>
+		<script src="app/filterService.js"></script>
+		<script src="app/filterController.js"></script>
 
 	<script src="//use.typekit.net/gfb2mjm.js"></script>
 
@@ -42,16 +49,30 @@
 	
 	<div class="row" id="search-wrapper">
 		<div class="col-md-6" id="search-left">
-			<h1>Begin Your Class Search</h1>
-			
-			<h3>Select A Term</h3>
-			
-			<h3>Select A Department</h3>
+				<h1><b>Begin Your Class Search</b></h1>
+				
+				<!-- TODO Dynamic Term List -->
+				<div class="form__group">
+					<label class="label--required" for="opt_Term">Select A Term</label>
+					<select name="" id="opt_Term">
+						<option value="">-- Select Term --</option>
+						<option value="FALL2016">Fall 2016</option>
+					</select>
+				</div>
+				
+				<div class="form__group">
+					<label class="label--required" for="subjects">Select A Subject</label>
+					<select id="subjects"><select>
+				</div>
 		</div>
 		
 		<div class="col-md-6" id="search-right">
-			<h1>Narrow Your Search</h1>
-			<h4>Instructor</h4>
+			<h1><b>Narrow Your Search</b></h1>
+			
+			<div class="form__group">
+				<label class="label--required" for="txt_instructor">Instructor</label>
+				<input id="txt_instructor" placeholder="Instructor">
+			</div>
 			<h4>Days</h4>
 			<h4>Times</h4>
 			
