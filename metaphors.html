@@ -1,6 +1,14 @@
 ﻿<!DOCTYPE HTML>
 <html class="no-js" lang="en">
 <head>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		<script src="app/mainSearchController.js"></script>
+		<script src="app/mainSearchService.js"></script>
+		<script src="app/constants.js"></script>
+		<script src="app/filterService.js"></script>
+		<script src="app/filterController.js"></script>
+
 <style>  
    
 ul.tab {
@@ -84,15 +92,7 @@ table#t01 tr:nth-child(odd) {
 <body>
   <!-- Add Code & Start Building :D -->
 
-
-<div class="row" style="margin:5px;">
-  <div class="col-md-8">
-<div class="jumbotron">
-    <img src="../comp490teamjeff/htmlstuff/images/cal_state_northridge.jpg">
-</div>
-</div>
-  <div class="col-md-4" style="margin-top;">
-<nav class="primary-nav">
+<nav class="primary-nav" style="margin-top:5px;">
 <div class="container">
   <div class="primary-nav__mobile">
     <div class="primary-nav__btn">
@@ -100,16 +100,15 @@ table#t01 tr:nth-child(odd) {
       <div class="bar"></div>
       <div class="bar"></div>
     </div>
-  
+    <div class="primary-nav__brand"><span class="sr-only">California State University, Northridge (CSUN)</span></div>
+  </div>
   <ul class="primary-nav__links">
-    <li><a class="primary-nav__link active" href="#">Nav Link</a></li>
-    <li><a class="primary-nav__link" href="#">Nav Link</a></li>
-    <li><a class="primary-nav__link" href="#">Nav Link</a></li>
+    <li><a class="primary-nav__link active" href="#">Class Search</a></li>
+    <li><a class="primary-nav__link" href="#">Mock Schedule</a></li>
+    <li><a class="primary-nav__link" href="#">Student Center</a></li>
   </ul>
 </div>
 </nav>
-</div>
-</div>
 
 
 <div class="row" style="padding-left:10px;">
@@ -122,33 +121,51 @@ table#t01 tr:nth-child(odd) {
 
 <div id="London" class="tabcontent" style="overflow:scroll; height:600px">
 <form action="" style="width:90%">
-<h4>Deparment</h4>
-<select name="Department">
-    <option value="Math">Math</option>
+<h4>Department</h4>
+<select id="subjects">
+    <!-- <option value="Math">Math</option>
     <option value="Science">Science</option>
     <option value="English">English</option>
-    <option value="History">History</option>
+    <option value="History">History</option> -->
   </select>
   <br>
-<h4>Instructor <sub>ex. Fitzgerald, Steve</sub></h4>
-  <input type="text" name="name" value="">
+<h4>Instructor</h4>
+<form> <!-- change -->
+ 			First Name: <input type="text" name="Firstname" id="firstName">
+ 			Last Name: <input type="text" name="Lastname" id="lastName">
+ 		</form>  
+  <!-- <input type="text" name="name" value=""> -->
   <br>
 <h4>Days</h4>
-<input type="checkbox" name="day" value="M">Monday<br>
+<!-- <input type="checkbox" name="day" value="M">Monday<br>
 <input type="checkbox" name="day" value="T">Tuesday<br>
 <input type="checkbox" name="day" value="W">Wednesday<br>
 <input type="checkbox" name="day" value="R">Thursday<br>
 <input type="checkbox" name="day" value="F">Friday<br>
-<input type="checkbox" name="day" value="S">Saturday<br>
+<input type="checkbox" name="day" value="S">Saturday<br> -->
+<div id="dayCheckboxes">
+			<input class="dayCheckbox" type="checkbox" value="M.*" checked="checked" />Monday <br>
+			<input class="dayCheckbox" type="checkbox" value=".*T.*" checked="checked" />Tuesday <br>
+			<input class="dayCheckbox" type="checkbox" value=".*W.*" checked="checked" />Wednesday <br>
+			<input class="dayCheckbox" type="checkbox" value=".*R.*" checked="checked" />Thursday <br>
+			<input class="dayCheckbox" type="checkbox" value=".*F.*" checked="checked" />Friday <br>
+			<input class="dayCheckbox" type="checkbox" value=".*S" checked="checked" />Saturday <br>
+			<input class="dayCheckbox" type="checkbox" value="A" checked="checked" />Online
+		</div>
+
 <br>
 <h4>Times</h4>
-From:<br>
-<select name="StartTime">
+
+<input id="start_time" type="text" placeholder="08:00" >Start Time <br> <!-- change -->
+<input id="end_time" type="text" placeholder="15:00" >End Time
+
+<!-- From:<br>
+ <select name="StartTime">
     <option value="8">8:00am</option>
     <option value="9">9:00am</option>
     <option value="10">10:00am</option>
     <option value="11">11:00am</option>
-  </select>
+  </select> 
   
 To:<br>
 <select name="EndTime">
@@ -156,19 +173,20 @@ To:<br>
     <option value="15">3:00pm</option>
     <option value="16">4:00pm</option>
     <option value="17">5:00pm</option>
-  </select>
-  <br>
-  <input type="submit">
+  </select> -->
+  <br><br>
+  <button id="department-submit-button">Filter By Department</button> <br><!-- change -->
+  <button id="instructor-submit-button">Search By Instructor</button> <br>
+  <button id="filter-submit-button">Filter</button>
+  <!-- <input type="submit"> change-->
+  <!-- <div id="course-results">
+		</div> -->
 </form>
 </div>
 
 <div id="Paris" class="tabcontent">
-  <h7>Monday</h7><br>
-  <h7>Tuesday</h7><br>
-  <h7>Wednesday</h7><br>
-  <h7>Thursday</h7><br>
-  <h7>Friday</h7><br>
-  <h7>Saturday</h7>	
+  <h3>Paris</h3>
+  <p>Paris is the capital of France.</p> 
 </div>
 
 </aside>
@@ -183,7 +201,7 @@ Select A Course and Choose and Option
 <div  style="overflow:scroll; height: 600px;">
 
 <dl class="accordion">
-  <dt class="accordion__header"> Class Title 1</dt>
+  <dt class="accordion__header"> COMP 100</dt>
   <dd class="accordion__content" style="background-color:#cccccc;">
   <table id="t01">
   <tr>
@@ -261,7 +279,7 @@ Select A Course and Choose and Option
   </tr>
 </table>  
   </dd>
-  <dt class="accordion__header"> Class Title 2</dt>
+  <dt class="accordion__header"> COMP 108</dt>
   <dd class="accordion__content" style="background-color:#cccccc;">
   <table id="t01">
   <tr>
@@ -339,7 +357,7 @@ Select A Course and Choose and Option
   </tr>
 </table>  
   </dd>
-  <dt class="accordion__header"> Class Title 3</dt>
+  <dt class="accordion__header"> COMP 182</dt>
   <dd class="accordion__content" style="background-color:#cccccc;">
   <table id="t01">
   <tr>
@@ -393,8 +411,10 @@ Select A Course and Choose and Option
 </table>  
   </dd>
 </dl>
-
+<div id="course-results"> <!-- change -->
+		</div>
 </div>
+
 </section>
 </div> 
 
