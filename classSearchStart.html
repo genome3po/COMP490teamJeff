@@ -10,41 +10,56 @@
 	<script src="//use.typekit.net/gfb2mjm.js"></script>
 
 	<link rel="stylesheet" href="bower_components/metaphor/dist/css/metaphor.css">
+	<link rel="stylesheet" href="classSearchStart.css">
 </head>
 <body>
 	<!-- Add Code & Start Building :D -->
-	<div id="top-banner">
-		<img src="csun_logo.jpg">
-	</div>
-
-	<nav class="primary-nav" style="margin-top:10px; border-bottom: 10px #CCC;">
-		<div class="container">
-			<div class="primary-nav__mobile">
-				<div class="primary-nav__btn">
-					<div class="bar"></div>
-					<div class="bar"></div>
-					<div class="bar"></div>
+	<div id="top-banner" class="row">
+		<div class="col-md-3">
+			<img src="csun_logo.jpg">
+		</div>
+		
+		<div class="col-md-9">
+			<nav class="primary-nav" style="margin-top:10px; border-bottom: 10px #CCC;">
+				<div class="container">
+					<div class="primary-nav__mobile">
+						<div class="primary-nav__btn">
+							<div class="bar"></div>
+							<div class="bar"></div>
+							<div class="bar"></div>
+						</div>
+					</div>
+					
+					<ul class="primary-nav__links">
+						<li><a class="primary-nav__link active" href="#">Class Search</a></li>
+						<li><a class="primary-nav__link" href="#">Mock Schedule</a></li>
+						<li><a class="primary-nav__link" href="#">Student Center</a></li>
+					</ul>
 				</div>
-			</div>
-			
-			<ul class="primary-nav__links">
-				<li><a class="primary-nav__link active" href="#">Class Search</a></li>
-				<li><a class="primary-nav__link" href="#">Mock Schedule</a></li>
-				<li><a class="primary-nav__link" href="#">Student Center</a></li>
-			</ul>
+			</nav>
 		</div>
-	</nav>
-	
-	<div class="row">
-		<div class="col-md-6">.col-md-6</div>
-		<div class="col-md-6">.col-md-6</div>
 	</div>
 	
-	<div class="row">
-		<div class="col-md-8">.col-md-6</div>
-		<div class="col-md-4">
-			<a class="btn btn-primary btn-lg"><h3>Search</h3></a>
+	<div class="row" id="search-wrapper">
+		<div class="col-md-6" id="search-left">
+			<h1>Begin Your Class Search</h1>
+			
+			<h3>Select A Term</h3>
+			
+			<h3>Select A Department</h3>
 		</div>
+		
+		<div class="col-md-6" id="search-right">
+			<h1>Narrow Your Search</h1>
+			<h4>Instructor</h4>
+			<h4>Days</h4>
+			<h4>Times</h4>
+			
+		</div>
+	</div>
+	
+	<div id="search-button">
+		<a class="btn btn-primary btn-lg"><h3>Search</h3></a>
 	</div>
 
 

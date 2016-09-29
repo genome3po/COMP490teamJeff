@@ -1,0 +1,18 @@
+#search-left {
+	border-right-width: 10px;
+	border-right-style: solid;
+	border-color: red;
+	height: 600px;
+}
+
+#search-right {
+	padding: 50px;
+}
+
+#search-wrapper {
+	padding-top: 25px;
+}
+
+#search-button {
+	text-align: center;
+}
