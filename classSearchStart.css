@@ -2,16 +2,16 @@
 	border-right-width: 10px;
 	border-right-style: solid;
 	border-color: red;
-	height: 600px;
+	height: 700px;
 	
 	
-	padding-top: 5%;
-	padding-left: 10%;
-	padding-right: 10%;
+	padding-top: 10%;
+	padding-left: 8%;
+	padding-right: 8%;
 }
 
 #search-right {	
-	padding-top: 10%;
+	padding-top: 2%;
 	padding-left: 10%;
 	padding-right: 10%;
 }

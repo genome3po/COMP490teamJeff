@@ -22,25 +22,15 @@
 <body>
 	<!-- Add Code & Start Building :D -->
 	<div id="top-banner" class="row">
-		<div class="col-md-3">
-			<img src="../comp490teamjeff/htmlstuff/images/logo.png">
+		<div class="col-md-8">
+			<img src="../COMP490teamJeff/htmlStuff/images/logo.png">
 		</div>
 		
-		<div class="col-md-9">
+		<div class="col-md-4">
 			<nav class="primary-nav" style="margin-top:10px; border-bottom: 10px #CCC;">
-				<div class="container">
-					<div class="primary-nav__mobile">
-						<div class="primary-nav__btn">
-							<div class="bar"></div>
-							<div class="bar"></div>
-							<div class="bar"></div>
-						</div>
-					</div>
-					
+				<div class="container">					
 					<ul class="primary-nav__links">
-						<li><a class="primary-nav__link active" href="#">Class Search</a></li>
-						<li><a class="primary-nav__link" href="#">Mock Schedule</a></li>
-						<li><a class="primary-nav__link" href="#">Student Center</a></li>
+						<a class="primary-nav__link" href="#">Student Center</a>
 					</ul>
 				</div>
 			</nav>
@@ -67,14 +57,32 @@
 		</div>
 		
 		<div class="col-md-6" id="search-right">
-			<h1><b>Narrow Your Search</b></h1>
+			<h3><b>Narrow Your Search</b></h3>
 			
 			<div class="form__group">
 				<label class="label" for="txt_instructor">Instructor</label>
 				<input id="txt_instructor" placeholder="Instructor">
 			</div>
 			<h4>Days</h4>
+			<form action="">
+			<label><input type="checkbox" name="day" value="Monday">Monday</label>
+			<label><input type="checkbox" name="day" value="Tuesday">Tuesday</label>
+			<label><input type="checkbox" name="day" value="Wednesday">Wednesday</label>
+			<label><input type="checkbox" name="day" value="Thursday">Thursday</label>
+			<label><input type="checkbox" name="day" value="Friday">Friday</label>
+			<label><input type="checkbox" name="day" value="Saturday">Saturday</label>			
+			</form>
+			
+			<br>
 			<h4>Times</h4>
+			<div class="form__group">
+				<label class="label" for="txt_instructor">From:</label>
+				<input id="txt_timeFrom">
+			</div>
+			<div class="form__group">
+				<label class="label" for="txt_timeTo">To:</label>
+				<input id="txt_timeTo">
+			</div>
 			
 		</div>
 	</div>
